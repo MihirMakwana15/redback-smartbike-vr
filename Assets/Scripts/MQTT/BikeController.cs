@@ -58,7 +58,7 @@ public class BikeController : MonoBehaviour
     // After we are connected, if the bike needs updating, publish the new state
     void Update()
     {
-        if (Mqtt.Instance.IsConnected && dirty)
+        if (Mqtt.Instance != null && Mqtt.Instance.IsConnected && dirty)
         {
             var ts = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
 

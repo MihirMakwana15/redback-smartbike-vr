@@ -15,6 +15,9 @@ public class FakeSpeedPublisher : MonoBehaviour
     // Roughly once every publishPeriod, publish a random speed value
     void Update()
     {
+        if (Mqtt.Instance == null || !Mqtt.Instance.IsConnected)
+            return;
+
         timeInterval += Time.deltaTime;
         if (timeInterval >= publishPeriod)
         {

@@ -46,3 +46,15 @@ When adding your new feature, add the files into each separate asset folder as r
 
 ## Useful links
 - [Unity docs](https://docs.unity.com/)
+
+## SmartBike MQTT workout commands
+
+The VR application can publish Ramped and FTP workout selections to the
+SmartBike IoT service. See
+[Docs/MQTT_WORKOUT_INTEGRATION.md](Docs/MQTT_WORKOUT_INTEGRATION.md) for the
+Unity scene setup, MQTT contract, validation procedure, reliability behaviour,
+and suggested assessment evidence.
+
+Unity can also subscribe to speed, cadence and distance telemetry. See
+[Docs/MQTT_TELEMETRY_WEEK5.md](Docs/MQTT_TELEMETRY_WEEK5.md) for the Week 5
+message contract, validation rules, testing process and evidence checklist.

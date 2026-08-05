@@ -1823,6 +1823,9 @@ GameObject:
   - component: {fileID: 144249161}
   - component: {fileID: 144249160}
   - component: {fileID: 144249159}
+  - component: {fileID: 144249166}
+  - component: {fileID: 144249165}
+  - component: {fileID: 144249167}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1844,9 +1847,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MqttHostname: localhost
   MqttPort: 1883
-  MqttUsername: redback
-  MqttPassword: VHoUYTkspmqL
+  MqttUsername: 
+  MqttPassword: 
   AutoConnect: 1
+  ReconnectDelaySeconds: 5
+  deviceId: 000001
 --- !u!114 &144249160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1861,8 +1866,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subscribed: 0
   speed: 0
-  turn: 0
-  brake: 0
   logMessages: 1
 --- !u!65 &144249161
 BoxCollider:
@@ -1950,6 +1953,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &144249165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144249158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f17f4aa485d423f9b123701fdde6941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  publisher: {fileID: 144249166}
+  mqtt: {fileID: 144249159}
+  telemetry: {fileID: 144249167}
+--- !u!114 &144249166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144249158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8176fdb4fc454d329c79ea9959f4371a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectOnPublish: 1
+  onCommandPublished:
+    m_PersistentCalls:
+      m_Calls: []
+  onPublishFailed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &144249167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144249158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08bb8e941fbc4f1894057878293cc2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maximumSpeedMetresPerSecond: 40
+  maximumCadenceRpm: 250
+  staleDataSeconds: 3
+  calculateDistanceFromSpeed: 1
+  logValidMessages: 1
+  onSpeedChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onCadenceChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDistanceChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &177085406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6851,6 +6914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 126096670}
+  countdownTimer: {fileID: 0}
 --- !u!1 &892469137
 GameObject:
   m_ObjectHideFlags: 0
@@ -7807,18 +7871,6 @@ MonoBehaviour:
   speed: 5
   bikeSelector: {fileID: 0}
   bikeMoverGameObject: {fileID: 0}
---- !u!114 &1027465680 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6826096831271285776, guid: 1edd98f62a1924dc5b1fc10872e9a074,
-    type: 3}
-  m_PrefabInstance: {fileID: 1196976517}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b618751708ca47d78bd7c0965a9e35a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1030172176
 GameObject:
   m_ObjectHideFlags: 0
@@ -15578,7 +15630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9470e06324e7b46159d1b90b56270f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer1: {fileID: 1027465680}
+  timer1: {fileID: 0}
   timerDuration: 15
   startDelay: 3
 --- !u!1 &1876193968
