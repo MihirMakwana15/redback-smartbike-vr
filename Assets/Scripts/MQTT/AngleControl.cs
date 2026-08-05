@@ -29,7 +29,7 @@ public class AngleControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mqtt.Instance == null)
+        if (Mqtt.Instance == null || Player == null)
             return;
 
         //This gets the GameObject's forward position, while taking angle into account.
@@ -56,6 +56,11 @@ public class AngleControl : MonoBehaviour
         timeInterval += Time.deltaTime;
         if (timeInterval >= publishPeriod)
         {
+            // The scene can start before the MQTT connection is established.
+            // Keep the latest angle locally and publish it on a later interval.
+            if (!Mqtt.Instance.IsConnected)
+                return;
+
             var ts = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
             //Clamps the data sent to the bike to within the valid range.
             float incline = Mathf.Clamp(BikeAngle, minimumAngle, maximumAngle);
