@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     public static event Action<PlayerController> OnPlayerControllerReady;
 
     private EventBinding<ItemAddedEvent> itemAddedEventBinding;
+    private float lastNetworkMovementTickTime;
 
     private void OnEnable()
     {
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Start()
     {
+        lastNetworkMovementTickTime = Time.unscaledTime;
         originalSpeed = movementSpeed;
         //to set score to 0 made by Jai
         score = 0;
@@ -125,9 +127,21 @@ public class PlayerController : MonoBehaviour
             if (!Mission_Activator.ActiveMission.MissionStarted)
                 Mission_Activator.ActiveMission.StartMission();
         }
+
+        // Keep the game playable when Photon is unavailable. NetworkPlayer normally
+        // drives Tick; after a short network silence this local fallback uses the
+        // same keyboard/controller axes without changing the bike movement logic.
+        if (_bikeMover != null && Time.unscaledTime - lastNetworkMovementTickTime > 0.5f)
+            TickMovement(Time.deltaTime);
     }
 
     public void Tick(float deltaTime)
+    {
+        lastNetworkMovementTickTime = Time.unscaledTime;
+        TickMovement(deltaTime);
+    }
+
+    private void TickMovement(float deltaTime)
     {
         if (_bikeMover == null) return;
 
