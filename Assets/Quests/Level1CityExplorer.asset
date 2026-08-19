@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04a1d07b9f74635a2e994a48801d477, type: 3}
+  m_Name: Level1CityExplorer
+  m_EditorClassIdentifier: 
+  questId: smartbike-level-1
+  title: City Explorer
+  description: Learn the route, collect energy and discover the park.
+  pointReward: 500
+  badgeId: city-explorer
+  unlockId: level-2
+  objectives:
+  - objectiveId: checkpoints
+    description: Reach 3 checkpoints
+    type: 0
+    targetCount: 3
+    targetSeconds: 10
+    targetId: demo-route
+    minimumMovementSpeed: 0.5
+  - objectiveId: collectibles
+    description: Collect 5 energy orbs
+    type: 1
+    targetCount: 5
+    targetSeconds: 10
+    targetId: demo-item
+    minimumMovementSpeed: 0.5
+  - objectiveId: movement
+    description: Keep moving for 20 seconds
+    type: 2
+    targetCount: 1
+    targetSeconds: 20
+    targetId: 
+    minimumMovementSpeed: 0.5
+  - objectiveId: explore
+    description: Explore the park area
+    type: 3
+    targetCount: 1
+    targetSeconds: 10
+    targetId: demo-area
+    minimumMovementSpeed: 0.5
+  - objectiveId: ordered-route
+    description: Complete the route without missing a checkpoint
+    type: 4
+    targetCount: 3
+    targetSeconds: 10
+    targetId: demo-route
+    minimumMovementSpeed: 0.5
